@@ -1,0 +1,8 @@
+[pt-BR] As bases podem ser obtidas no repositório de origem. Link abaixo.
+
+[en-US] Bases can be retrieved from the source repository. Link below.
+
+[ru] Базы можно получить из исходного репозитория. Ссылка ниже.
+
+
+https://repositoriodatasharingfapesp.uspdigital.usp.br/
