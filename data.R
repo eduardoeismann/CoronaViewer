@@ -4,12 +4,19 @@ excluirColunaIdAtendimento <- c("ID_ATENDIMENTO")
 
 
 # -- CONCATENATE DATA PACIENTES ------------------------------------------------
-dadosPacientesHCliSP <- read.csv("C:\\Users\\Eduardo\\Desktop\\Bases de Dados Covid\\Hosp Clinicas SP\\HC_PACIENTES_1.csv", header = TRUE, sep = "|", quote = "", dec = ".", fill = TRUE)
+dadosPacientesHCliSP <- read.csv("C:\\Users\\Eduardo\\Desktop\\Bases de Dados Covid\\Hosp Clinicas SP\\HC_PACIENTES_1.csv",
+                                 header = TRUE,
+                                 sep = "|",
+                                 quote = "",
+                                 dec = ".",
+                                 fill = TRUE) 
+
 dadosPacientesAlbEin <- read.csv("C:\\Users\\Eduardo\\Desktop\\Bases de Dados Covid\\Hosp Albert Einstein\\einstein_full_dataset_paciente.csv", header = TRUE, sep = "|", quote = "", dec = ".", fill = TRUE)
 dadosPacientesGruFle <- read.csv("C:\\Users\\Eduardo\\Desktop\\Bases de Dados Covid\\Hosp Grupo Fleury\\Grupo_Fleury_Dataset_Covid19_Pacientes.csv", header = TRUE, sep = "|", quote = "", dec = ".", fill = TRUE)
 dadosPacientesSirLib <- read.csv("C:\\Users\\Eduardo\\Desktop\\Bases de Dados Covid\\Hosp Sirio Libanes\\hsl_patient_1.csv", header = TRUE, sep = "|", quote = "", dec = ".", fill = TRUE)
 
 dadosPacientes <- rbind( dadosPacientesHCliSP, dadosPacientesAlbEin, dadosPacientesGruFle, dadosPacientesSirLib )
+dadosPacientes <- dadosPacientesSirLib
 # ------------------------------------------------------------------------------
 
 
@@ -25,11 +32,17 @@ head(dadosExamesSirLib)
 head(dadosExamesHCliSP)
 
 dadosExames <- rbind( dadosExamesHCliSP, dadosExamesAlbEin, dadosExamesGruFle, dadosExamesSirLib)
+dadosExames <- dadosExamesSirLib
 # ------------------------------------------------------------------------------
 
 
 # -- DADOS DE DESFECHO DE PACIENTES HOSP SIR LIB -------------------------------
-dadosDesfecho <- read.csv("C:\\Users\\Eduardo\\Desktop\\Bases de Dados Covid\\Hosp Sirio Libanes\\hsl_desfecho_1.csv", header = TRUE, sep = "|", quote = "", dec = ".", fill = TRUE)
+dadosDesfecho <- read.csv("C:\\Users\\Eduardo\\Desktop\\Bases de Dados Covid\\Hosp Sirio Libanes\\hsl_desfecho_1.csv", 
+                          header = TRUE, 
+                          sep = "|", 
+                          quote = "", 
+                          dec = ".", 
+                          fill = TRUE)
 # ------------------------------------------------------------------------------
 
 dadosSelecionados <- merge(dadosPacientes, dadosExames, by = "ID_PACIENTE")
@@ -37,11 +50,11 @@ dadosSelecionados <- merge(dadosPacientes, dadosExames, by = "ID_PACIENTE")
 dadosObitosRecuperados <- merge(dadosPacientes, dadosDesfecho, by = "ID_PACIENTE")
 
 # RESULTADOS DOS EXAMES (POSITIVO) POR EXAME
-exameColetadoNomenclatura01_POS <- subset(dadosExames, DE_ANALITO == "CoronavirusNL63" & (DE_RESULTADO == "Detectado" | DE_RESULTADO == "DETECTADO" | DE_RESULTADO == "DETECTADO (POSITIVO)" | DE_RESULTADO == "Reagente" | DE_RESULTADO == "REAGENTE" | DE_RESULTADO == "REAGENTE (POSITIVO)"))
+exameColetadoNomenclatura01_POS <- subset(dadosExames, DE_ANALITO == "CoronavirusNL63"     & (DE_RESULTADO == "Detectado" | DE_RESULTADO == "DETECTADO" | DE_RESULTADO == "DETECTADO (POSITIVO)" | DE_RESULTADO == "Reagente" | DE_RESULTADO == "REAGENTE" | DE_RESULTADO == "REAGENTE (POSITIVO)"))
 exameColetadoNomenclatura02_POS <- subset(dadosExames, DE_ANALITO == "Resultado COVID-19:" & (DE_RESULTADO == "Detectado" | DE_RESULTADO == "DETECTADO" | DE_RESULTADO == "DETECTADO (POSITIVO)" | DE_RESULTADO == "Reagente" | DE_RESULTADO == "REAGENTE" | DE_RESULTADO == "REAGENTE (POSITIVO)"))
-exameColetadoNomenclatura03_POS <- subset(dadosExames, DE_ANALITO == "CoronavirusOC43" & (DE_RESULTADO == "Detectado" | DE_RESULTADO == "DETECTADO" | DE_RESULTADO == "DETECTADO (POSITIVO)" | DE_RESULTADO == "Reagente" | DE_RESULTADO == "REAGENTE" | DE_RESULTADO == "REAGENTE (POSITIVO)"))
-exameColetadoNomenclatura04_POS <- subset(dadosExames, DE_ANALITO == "Coronavirus229E" & (DE_RESULTADO == "Detectado" | DE_RESULTADO == "DETECTADO" | DE_RESULTADO == "DETECTADO (POSITIVO)" | DE_RESULTADO == "Reagente" | DE_RESULTADO == "REAGENTE" | DE_RESULTADO == "REAGENTE (POSITIVO)"))
-exameColetadoNomenclatura05_POS <- subset(dadosExames, DE_ANALITO == "CoronavirusHKU1" & (DE_RESULTADO == "Detectado" | DE_RESULTADO == "DETECTADO" | DE_RESULTADO == "DETECTADO (POSITIVO)" | DE_RESULTADO == "Reagente" | DE_RESULTADO == "REAGENTE" | DE_RESULTADO == "REAGENTE (POSITIVO)"))
+exameColetadoNomenclatura03_POS <- subset(dadosExames, DE_ANALITO == "CoronavirusOC43"     & (DE_RESULTADO == "Detectado" | DE_RESULTADO == "DETECTADO" | DE_RESULTADO == "DETECTADO (POSITIVO)" | DE_RESULTADO == "Reagente" | DE_RESULTADO == "REAGENTE" | DE_RESULTADO == "REAGENTE (POSITIVO)"))
+exameColetadoNomenclatura04_POS <- subset(dadosExames, DE_ANALITO == "Coronavirus229E"     & (DE_RESULTADO == "Detectado" | DE_RESULTADO == "DETECTADO" | DE_RESULTADO == "DETECTADO (POSITIVO)" | DE_RESULTADO == "Reagente" | DE_RESULTADO == "REAGENTE" | DE_RESULTADO == "REAGENTE (POSITIVO)"))
+exameColetadoNomenclatura05_POS <- subset(dadosExames, DE_ANALITO == "CoronavirusHKU1"     & (DE_RESULTADO == "Detectado" | DE_RESULTADO == "DETECTADO" | DE_RESULTADO == "DETECTADO (POSITIVO)" | DE_RESULTADO == "Reagente" | DE_RESULTADO == "REAGENTE" | DE_RESULTADO == "REAGENTE (POSITIVO)"))
 exameColetadoNomenclatura06_POS <- subset(dadosExames, DE_ANALITO == "COVID IgG Interp aqui" & (DE_RESULTADO == "Detectado" | DE_RESULTADO == "DETECTADO" | DE_RESULTADO == "DETECTADO (POSITIVO)" | DE_RESULTADO == "Reagente" | DE_RESULTADO == "REAGENTE" | DE_RESULTADO == "REAGENTE (POSITIVO)"))
 exameColetadoNomenclatura07_POS <- subset(dadosExames, DE_ANALITO == "Covid 19, Deteccao por PCR" & (DE_RESULTADO == "Detectado" | DE_RESULTADO == "DETECTADO" | DE_RESULTADO == "DETECTADO (POSITIVO)" | DE_RESULTADO == "Reagente" | DE_RESULTADO == "REAGENTE" | DE_RESULTADO == "REAGENTE (POSITIVO)"))
 exameColetadoNomenclatura08_POS <- subset(dadosExames, DE_ANALITO == "Covid 19, Anticorpos IgM, Quimioluminescencia" & (DE_RESULTADO == "Detectado" | DE_RESULTADO == "DETECTADO" | DE_RESULTADO == "DETECTADO (POSITIVO)" | DE_RESULTADO == "Reagente" | DE_RESULTADO == "REAGENTE" | DE_RESULTADO == "REAGENTE (POSITIVO)"))

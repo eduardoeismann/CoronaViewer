@@ -1,6 +1,5 @@
 library(shinydashboard)
 library(ggplot2)
-library(plotly)
 source("data.R")
 
 ui <- dashboardPage(
@@ -75,21 +74,21 @@ ui <- dashboardPage(
                 fluidRow(
                     box(
                         title = "Pacientes por faixa de Ano de Nascimento",
-                        plotOutput( outputId = "visaoGeralAnoNascimento" ) # Finalizado
+                        plotOutput( outputId = "visaoGeralAnoNascimento" )
                     ),
                     box(
                         title = "Pacientes por Sexo",
-                        plotOutput( outputId = "visaoGeralSexo" ) #Finalizado
+                        plotOutput( outputId = "visaoGeralSexo" )
                     ),
                     box(
                         title = "Pacientes por Estado",
                         width = 12,
-                        plotOutput( outputId = "visaoGeralPacientesPorEstado" ) #Finalizado
+                        plotOutput( outputId = "visaoGeralPacientesPorEstado" )
                     ),
                     box(
                         title = "Pacientes por Cidade",
                         width = 12,
-                        plotOutput( outputId = "visaoGeralPacientesPorCidade" ) #Finalizado
+                        plotOutput( outputId = "visaoGeralPacientesPorCidade" )
                     )
                 )
             ),
@@ -442,7 +441,8 @@ ui <- dashboardPage(
                             <h4><strong>Instagram: </strong><a href=\"https://www.instagram.com/eduardoeismann/\">@eduardoeismann</a></h4>
                             <h4><strong>Twitter: </strong><a href=\"https://twitter.com/EduardoEismann/\">@eduardoeismann</a></h4>
                             <hr>
-                            <h4>FAPESP. FAPESP COVID-19 Data Sharing/BR, Available from https://repositoriodatasharingfapesp.uspdigital.usp.br/. Accessed on July 2nd 2020</h4>
+                            <h4>FAPESP. FAPESP COVID-19 Data Sharing/BR, Available from https://repositoriodatasharingfapesp.uspdigital.usp.br/. 
+                                Accessed on July 2nd 2020</h4>
                         </html>
                     ")
                 )

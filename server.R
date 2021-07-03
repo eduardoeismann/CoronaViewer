@@ -1,17 +1,9 @@
-library(shiny)
+library(shinydashboard)
 library(ggplot2)
-library(plotly)
-library(intrval)
 source("data.R")
 
 server <- function(input, output) {
   
-# -- VARIAVEIS E DADOS PARA AREA DE VISAO GERAL --------------------------------
-    # COMO HÁ DIFERENTES FORMAS DE CHAMAR O MESMO EXAME NOS DIFERENTES HOSPITAIS
-    # VI NECESSÁRIO CRIAR UMA VARIÁVEL PARA RECEBER CADA UM DOS TIPOS DE EXAMES.
-    # LEMBRANDO QUE AQUI, HÁ EXAMES DE QUATRO HOSPITAIS DIFERENTES E EXAMES COM
-    # NOMES SIMILARES.
-
     exameColetadoNomenclatura01 <- sum(dadosExames$DE_ANALITO == "CoronavirusNL63")
     exameColetadoNomenclatura02 <- sum(dadosExames$DE_ANALITO == "Resultado COVID-19:")
     exameColetadoNomenclatura03 <- sum(dadosExames$DE_ANALITO == "CoronavirusOC43")
@@ -54,7 +46,7 @@ server <- function(input, output) {
   
     
   
-    output$visaoGeralAnoNascimento <- renderPlot({ #Finalizado
+    output$visaoGeralAnoNascimento <- renderPlot({
         ggplot(
             dadosPacientes,
             aes( x = AA_NASCIMENTO )
@@ -62,7 +54,7 @@ server <- function(input, output) {
         labs( x = "Ano de Nascimento", y = "Quantidade" )
     })
     
-    output$visaoGeralSexo <- renderPlot({ #Finalizado
+    output$visaoGeralSexo <- renderPlot({
         ggplot(
             dadosPacientes,
             aes( x = IC_SEXO )
@@ -70,7 +62,7 @@ server <- function(input, output) {
         labs( x = "Sexo do Paciente", y = "Quantidade" )
     })
     
-    output$visaoGeralPacientesPorEstado <- renderPlot({ #Finalizado
+    output$visaoGeralPacientesPorEstado <- renderPlot({
         ggplot(
             dadosPacientes,
             aes( x = CD_UF )
@@ -78,7 +70,7 @@ server <- function(input, output) {
         labs( x = "UF dos Pacientes", y = "Quantidade" )
     })
     
-    output$visaoGeralPacientesPorCidade <- renderPlot({ #Finalizado
+    output$visaoGeralPacientesPorCidade <- renderPlot({
         ggplot(
             dadosPacientes,
             aes( x = CD_MUNICIPIO )
@@ -88,28 +80,28 @@ server <- function(input, output) {
     
 # ------------------------------------------------------------------------------
     
-    output$pacientes_analisados <- renderValueBox({ #Finalizado
+    output$pacientes_analisados <- renderValueBox({
         valueBox(
             nrow(dadosPacientes), "Pacientes Analisados", icon = icon("sort-amount-up"),
             color = "blue"
         )
     })
     
-    output$quantidade_homens <- renderValueBox({ #Finalizado
+    output$quantidade_homens <- renderValueBox({
         valueBox(
             sum(dadosPacientes$IC_SEXO == "M"), "Quantidade Homens", icon = icon("mars"),
             color = "purple"
         )
     })
     
-    output$quantidade_mulheres <- renderValueBox({ #Finalizado
+    output$quantidade_mulheres <- renderValueBox({
         valueBox(
             sum(dadosPacientes$IC_SEXO == "F"), "Quantidade Mulheres", icon = icon("venus"),
             color = "purple"
         )
     })
     
-    output$exames_coletados <- renderValueBox({ #Finalizado
+    output$exames_coletados <- renderValueBox({
         valueBox(
             totalExamesCovidRealizados,
             "Exames Válidos Coletados",
@@ -118,7 +110,7 @@ server <- function(input, output) {
         )
     })
     
-    output$quantidade_positivos <- renderValueBox({ #Finalizado
+    output$quantidade_positivos <- renderValueBox({
         valueBox(
             resultadosExamesPositivos,
             "Quantidade Positivos",
@@ -127,7 +119,7 @@ server <- function(input, output) {
         )
     })
     
-    output$quantidade_negativos <- renderValueBox({ #Finalizado
+    output$quantidade_negativos <- renderValueBox({
         valueBox(
             resultadosExamesNegativos,
             "Quantidade Negativos",
@@ -136,7 +128,7 @@ server <- function(input, output) {
         )
     })
     
-    output$quantidade_altas <- renderValueBox({ #Finalizado
+    output$quantidade_altas <- renderValueBox({
         alta1 <- sum(dadosDesfecho$DE_DESFECHO == "Alta Administrativa")
         alta2 <- sum(dadosDesfecho$DE_DESFECHO == "Alta medica melhorado")
         alta3 <- sum(dadosDesfecho$DE_DESFECHO == "Alta por abandono")
@@ -164,7 +156,7 @@ server <- function(input, output) {
     output$desistencia_tratamento <- renderValueBox({ #Finalizado
         valueBox(
             desistencia <- sum(dadosDesfecho$DE_DESFECHO == "Desistencia do atendimento"),
-            "Desistência de Atendimento",
+            "Desistência Atendimento",
             icon = icon("chart-bar"),
             color = "yellow"
         )
